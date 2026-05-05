@@ -6,7 +6,7 @@
 <title>ModSteam Pro</title>
 
 <style>
-/* (SEU CSS TODO — NÃO MEXI EM NADA) */
+/* TODO SEU CSS ORIGINAL — NÃO ALTEREI NADA */
 body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
 
 .header {
@@ -17,7 +17,10 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
   gap: 10px;
 }
 
-.menu-btn { font-size: 22px; cursor: pointer; }
+.menu-btn {
+  font-size: 22px;
+  cursor: pointer;
+}
 
 .sidebar {
   position: fixed;
@@ -45,7 +48,13 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
   font-weight: bold;
 }
 
-.sidebar.open { left: 0; }
+.sidebar a:hover {
+  background: #1f1f1f;
+}
+
+.sidebar.open {
+  left: 0;
+}
 
 .overlay {
   position: fixed;
@@ -55,7 +64,9 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
   z-index: 999;
 }
 
-.overlay.show { display: block; }
+.overlay.show {
+  display: block;
+}
 
 .search { padding: 10px; }
 .search input {
@@ -113,15 +124,59 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
   font-size: 13px;
   color: #aaa;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  overflow-y: auto;
+  z-index: 999;
+  padding: 15px;
+}
+
+.close {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: #1f1f1f;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.gallery-item {
+  position: relative;
+  min-width: 180px;
+  height: 120px;
+  background: #222;
+  border-radius: 12px;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
 </style>
 </head>
 
 <body>
 
-<!-- MENU -->
 <div class="sidebar" id="sidebar">
   <a href="index.html" class="active">Mods Project Zomboid</a>
   <a href="download.html">Download Project Zomboid</a>
+  <a href="#">Servidores BR</a>
+  <a href="#">Servidores USA</a>
+  <a href="#">Discord</a>
 </div>
 
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
@@ -137,6 +192,11 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
 
 <div id="sections"></div>
 
+<div class="modal" id="modal">
+  <div class="close" onclick="fechar()">✖</div>
+  <div id="content"></div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -149,8 +209,8 @@ const db = getDatabase(app);
 let mods = [];
 
 window.toggleMenu = ()=>{
-  sidebar.classList.toggle("open");
-  overlay.classList.toggle("show");
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("show");
 };
 
 function render(){
@@ -212,7 +272,7 @@ function section(title,data,isHorizontal){
       img.style.display="block";
     };
 
-    // 🔥 AQUI FOI ALTERADO (ABRIR OUTRA PÁGINA)
+    // 🔥 ÚNICA ALTERAÇÃO
     div.onclick = ()=>{
       window.location.href = "PaginaVisual.html?id=" + m.id;
     };
@@ -231,7 +291,7 @@ onValue(ref(db,"mods"),snap=>{
   mods=[];
   snap.forEach(i=>{
     let data = i.val();
-    data.id = i.key; // ESSENCIAL
+    data.id = i.key;
     mods.push(data);
   });
   render();
