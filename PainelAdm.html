@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Painel ADM</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0b0b0b;
+  color:white;
+}
+
+.header{
+  background:#111;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.back{
+  font-size:24px;
+  cursor:pointer;
+}
+
+.container{
+  padding:15px;
+}
+
+.card{
+  background:#151515;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:12px;
+}
+
+.nick{
+  color:#00c853;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.motivo{
+  margin-top:10px;
+  color:#ccc;
+  line-height:1.4;
+}
+
+.data{
+  margin-top:10px;
+  font-size:12px;
+  color:#777;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.actions button{
+  flex:1;
+  border:none;
+  padding:12px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.approve{
+  background:#00c853;
+  color:black;
+}
+
+.reject{
+  background:#ff3b3b;
+  color:white;
+}
+
+.empty{
+  text-align:center;
+  margin-top:50px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+  <div class="back"
+  onclick="history.back()">
+
+    ←
+
+  </div>
+
+  <div>
+    🛠️ Painel ADM
+  </div>
+
+</div>
+
+<div class="container">
+
+  <div id="lista"></div>
+
+  <div class="empty"
+  id="empty"
+  style="display:none;">
+
+    Nenhuma solicitação.
+
+  </div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue,
+  update,
+  get
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyB5A-ySceXCFRQ7iSCnOA68nRJqYpK6DQc",
+
+  databaseURL:
+  "https://dayzozmbi-server-default-rtdb.firebaseio.com",
+
+  projectId:
+  "dayzozmbi-server",
+
+  storageBucket:
+  "dayzozmbi-server.firebasestorage.app",
+
+  messagingSenderId:
+  "221905253103",
+
+  appId:
+  "1:221905253103:android:fc1bc06782cf5735c4611a"
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+/* SEGURANÇA */
+const usuario =
+JSON.parse(
+localStorage.getItem("usuarioModSteam")
+);
+
+if(
+  !usuario
+  ||
+  usuario.nick !== "ADM"
+){
+
+  alert("Acesso negado.");
+
+  location.href =
+  "index.html";
+
+}
+
+const lista =
+document.getElementById("lista");
+
+const empty =
+document.getElementById("empty");
+
+/* APROVAR */
+window.aprovar =
+async (nick,id)=>{
+
+  /* SALVAR NO LOCAL */
+  if(usuario.nick === nick){
+
+    usuario.autorizadoUpload = true;
+
+    localStorage.setItem(
+      "usuarioModSteam",
+      JSON.stringify(usuario)
+    );
+
+  }
+
+  await update(
+    ref(db,
+    "solicitacoesUpload/"+id),
+    {
+      status:"aprovado"
+    }
+  );
+
+  alert(
+    nick +
+    " aprovado!"
+  );
+
+};
+
+/* RECUSAR */
+window.recusar =
+async (id)=>{
+
+  await update(
+    ref(db,
+    "solicitacoesUpload/"+id),
+    {
+      status:"recusado"
+    }
+  );
+
+  alert("Solicitação recusada.");
+
+};
+
+/* LISTA */
+onValue(
+ref(db,"solicitacoesUpload"),
+snap=>{
+
+  lista.innerHTML = "";
+
+  let encontrou = false;
+
+  snap.forEach(i=>{
+
+    const s =
+    i.val();
+
+    if(
+      s.status !== "pendente"
+    ){
+      return;
+    }
+
+    encontrou = true;
+
+    const div =
+    document.createElement("div");
+
+    div.className = "card";
+
+    div.innerHTML = `
+      <div class="nick">
+        ${s.nick}
+      </div>
+
+      <div class="motivo">
+        ${s.motivo}
+      </div>
+
+      <div class="data">
+        ${new Date(s.data)
+        .toLocaleString("pt-BR")}
+      </div>
+
+      <div class="actions">
+
+        <button
+        class="approve"
+        onclick="aprovar(
+          '${s.nick}',
+          '${i.key}'
+        )">
+
+          Aprovar
+
+        </button>
+
+        <button
+        class="reject"
+        onclick="recusar(
+          '${i.key}'
+        )">
+
+          Recusar
+
+        </button>
+
+      </div>
+    `;
+
+    lista.appendChild(div);
+
+  });
+
+  empty.style.display =
+  encontrou ? "none" : "block";
+
+});
+
+</script>
+
+</body>
+</html>
