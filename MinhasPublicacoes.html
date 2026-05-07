@@ -66,27 +66,37 @@ body{
   display:none;
 }
 
-/* BOTÃO EDITAR */
-.edit-btn{
+/* BOTÕES */
+.actions{
   position:absolute;
   top:8px;
   right:8px;
+  display:flex;
+  gap:6px;
+  z-index:20;
+}
+
+.edit-btn,
+.delete-btn{
   width:34px;
   height:34px;
   border-radius:50%;
-  background:rgba(0,0,0,0.75);
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:16px;
   cursor:pointer;
-  z-index:10;
   border:1px solid #333;
+  background:rgba(0,0,0,0.75);
 }
 
 .edit-btn:hover{
   background:#00c853;
   color:black;
+}
+
+.delete-btn:hover{
+  background:#ff3b3b;
 }
 
 .loader{
@@ -136,7 +146,6 @@ body{
   font-size:15px;
 }
 
-/* BOTÃO FLUTUANTE */
 .fab{
   position:fixed;
   right:20px;
@@ -178,12 +187,11 @@ body{
   <div class="grid" id="grid"></div>
 
   <div class="empty" id="empty" style="display:none;">
-    Você ainda não publicou nenhum mod.
+    Nenhum mod encontrado.
   </div>
 
 </div>
 
-<!-- BOTÃO FLUTUANTE -->
 <button class="fab" onclick="abrirUpload()">
   +
 </button>
@@ -196,7 +204,8 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getDatabase,
   ref,
-  onValue
+  onValue,
+  remove
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -237,6 +246,10 @@ if(!usuario || !usuario.nick){
 document.getElementById("nickUser")
 .innerText = usuario.nick;
 
+/* ADMIN */
+const isADM =
+usuario.nick === "ADM";
+
 /* BOTÕES */
 window.voltar = ()=>{
 
@@ -260,6 +273,30 @@ window.editarMod = (event,id)=>{
 
 };
 
+/* EXCLUIR */
+window.excluirMod = async (event,id)=>{
+
+  event.stopPropagation();
+
+  const confirmar =
+  confirm("Deseja excluir este mod?");
+
+  if(!confirmar) return;
+
+  try{
+
+    await remove(ref(db,"mods/"+id));
+
+    alert("Mod excluído!");
+
+  }catch(e){
+
+    alert(e.message);
+
+  }
+
+};
+
 /* GRID */
 const grid =
 document.getElementById("grid");
@@ -278,10 +315,14 @@ onValue(ref(db,"mods"), snap=>{
 
     const m = i.val();
 
-    /* MOSTRAR APENAS MODS DO USUÁRIO */
-    if(m.autorNick !== usuario.nick){
+    /* SE NÃO FOR ADM */
+    if(!isADM){
 
-      return;
+      if(m.autorNick !== usuario.nick){
+
+        return;
+
+      }
 
     }
 
@@ -295,9 +336,18 @@ onValue(ref(db,"mods"), snap=>{
     card.innerHTML = `
       <div class="card-img">
 
-        <div class="edit-btn"
-        onclick="editarMod(event,'${i.key}')">
-          ✏️
+        <div class="actions">
+
+          <div class="edit-btn"
+          onclick="editarMod(event,'${i.key}')">
+            ✏️
+          </div>
+
+          <div class="delete-btn"
+          onclick="excluirMod(event,'${i.key}')">
+            🗑️
+          </div>
+
         </div>
 
         <div class="loader"></div>
@@ -313,11 +363,19 @@ onValue(ref(db,"mods"), snap=>{
         </div>
 
         <div class="card-meta">
+          👤 ${m.autorNick || "Desconhecido"}
+        </div>
+
+        <div class="card-meta">
           📥 ${m.downloads || 0} downloads
         </div>
 
         <div class="card-meta">
-          Versão ${m.versao || "N/A"}
+          ⭐ ${m.mediaAvaliacoes || "0.0"}
+        </div>
+
+        <div class="card-meta">
+          📦 ${m.tamanhoMB || "?"} MB
         </div>
 
       </div>
