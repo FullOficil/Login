@@ -305,7 +305,7 @@ window.abrirUpload = async ()=>{
   );
 
   const autorizado =
-  snap.exists();
+  snap.val() === true;
 
   /* NÃO AUTORIZADO */
   if(!autorizado){
