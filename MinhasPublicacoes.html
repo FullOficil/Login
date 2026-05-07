@@ -1,0 +1,235 @@
+<!DOCTYPE html> 
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minhas Publicações</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b0b0b;
+  color: white;
+}
+
+.header {
+  padding: 15px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.menu-btn {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.login-btn{
+  background:#00c853;
+  color:black;
+  border:none;
+  padding:10px 16px;
+  border-radius:20px;
+  font-weight:bold;
+  cursor:pointer;
+  max-width:140px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: #111;
+  transition: 0.3s;
+  padding-top: 20px;
+  z-index: 1000;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid #222;
+}
+
+.sidebar a.active {
+  background: #00c853;
+  color: black;
+  font-weight: bold;
+}
+
+.sidebar a:hover {
+  background: #1f1f1f;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 999;
+}
+
+.overlay.show {
+  display: block;
+}
+
+.content{
+  padding:20px;
+}
+
+.empty{
+  margin-top:40px;
+  text-align:center;
+  color:#888;
+  font-size:15px;
+}
+
+/* BOTÃO FLUTUANTE */
+.fab-upload{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:65px;
+  height:65px;
+  border:none;
+  border-radius:50%;
+  background:#00c853;
+  color:black;
+  font-size:30px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  z-index:2000;
+}
+
+.fab-upload:hover{
+  transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar" id="sidebar">
+
+  <a href="index.html">
+    Mods Project Zomboid
+  </a>
+
+  <a href="download.html">
+    Download Project Zomboid
+  </a>
+
+  <a href="MinhasPublicacoes.html" class="active">
+    📦 Minha Publicações
+  </a>
+
+  <a href="#">
+    Servidores BR
+  </a>
+
+  <a href="#">
+    Servidores USA
+  </a>
+
+  <a href="#">
+    Discord
+  </a>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<div class="header">
+
+  <div class="header-left">
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    Minha Publicações
+  </div>
+
+  <button class="login-btn" id="loginBtn">
+    Login
+  </button>
+
+</div>
+
+<div class="content">
+
+  <div class="empty">
+    Você ainda não possui publicações.
+  </div>
+
+</div>
+
+<!-- BOTÃO FLUTUANTE -->
+<button class="fab-upload" id="uploadBtn">
+  ＋
+</button>
+
+<script>
+
+const usuario =
+  JSON.parse(localStorage.getItem("usuarioModSteam"));
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+if(usuario && usuario.nick){
+
+  loginBtn.innerText = usuario.nick;
+
+}else{
+
+  loginBtn.innerText = "Login";
+
+}
+
+loginBtn.onclick = ()=>{
+
+  window.location.href = "Login.html";
+
+};
+
+window.toggleMenu = ()=>{
+
+  document.getElementById("sidebar")
+    .classList.toggle("open");
+
+  document.getElementById("overlay")
+    .classList.toggle("show");
+
+};
+
+/* ABRIR UPLOAD */
+document
+  .getElementById("uploadBtn")
+  .onclick = ()=>{
+
+    window.location.href = "Uplods.html";
+
+};
+
+</script>
+
+</body>
+</html>
