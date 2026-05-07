@@ -77,12 +77,13 @@ body{
   margin-top:4px;
 }
 
-/* INFO STYLE PLAYSTORE */
+/* INFO PLAY STORE */
 .stats{
   display:flex;
   justify-content:space-between;
   margin-top:25px;
   text-align:center;
+  gap:10px;
 }
 
 .stat{
@@ -104,7 +105,7 @@ body{
   margin-top:5px;
 }
 
-/* BOTÃO */
+/* BOTÕES */
 .download-btn{
   width:100%;
   border:none;
@@ -147,7 +148,7 @@ body{
   flex-shrink:0;
 }
 
-/* DESCRIÇÃO */
+/* ÁREA */
 .area{
   padding:20px;
 }
@@ -295,8 +296,12 @@ const params = new URLSearchParams(location.search);
 const id = params.get("id");
 
 if(!id){
+
   document.getElementById("content").innerHTML =
   "Mod não encontrado";
+
+  throw new Error();
+
 }
 
 /* PEGAR MOD */
@@ -319,7 +324,7 @@ const dataFormatada = m.data
 : "N/A";
 
 /* TAMANHO */
-let tamanhoMB = m.tamanhoMB || "?";
+const tamanhoMB = m.tamanhoMB || "0";
 
 /* AVALIAÇÕES */
 const avaliacoes = m.avaliacoes || {};
@@ -330,6 +335,7 @@ let soma = 0;
 Object.values(avaliacoes).forEach(a=>{
 
   soma += Number(a.estrelas || 0);
+
   total++;
 
 });
@@ -367,7 +373,9 @@ document.getElementById("content").innerHTML = `
 
   <div class="stats">
 
+    <!-- AVALIAÇÕES -->
     <div class="stat">
+
       <div class="stat-top">
         ⭐ ${media}
       </div>
@@ -375,9 +383,25 @@ document.getElementById("content").innerHTML = `
       <div class="stat-bottom">
         ${total} avaliações
       </div>
+
     </div>
 
+    <!-- DOWNLOADS -->
     <div class="stat">
+
+      <div class="stat-top">
+        📥 ${m.downloads || 0}
+      </div>
+
+      <div class="stat-bottom">
+        Downloads
+      </div>
+
+    </div>
+
+    <!-- DATA -->
+    <div class="stat">
+
       <div class="stat-top">
         📅
       </div>
@@ -385,9 +409,12 @@ document.getElementById("content").innerHTML = `
       <div class="stat-bottom">
         ${dataFormatada}
       </div>
+
     </div>
 
+    <!-- TAMANHO -->
     <div class="stat">
+
       <div class="stat-top">
         📦 ${tamanhoMB}
       </div>
@@ -395,16 +422,17 @@ document.getElementById("content").innerHTML = `
       <div class="stat-bottom">
         MB
       </div>
+
     </div>
 
   </div>
 
   <button class="download-btn" onclick="baixar()">
-    Instalar
+    Baixar Mod
   </button>
 
   <button class="share-btn" onclick="compartilhar()">
-    Compartilhar
+    Compartilhar Mod
   </button>
 
 </div>
@@ -506,7 +534,7 @@ document.getElementById("content").innerHTML = `
 
 `;
 
-/* ESTRELAS */
+/* ESCOLHER ESTRELAS */
 let estrelasSelecionadas = 5;
 
 document.querySelectorAll(".star").forEach(s=>{
@@ -520,7 +548,7 @@ document.querySelectorAll(".star").forEach(s=>{
 
 });
 
-/* COMENTAR */
+/* ENVIAR COMENTÁRIO */
 window.enviarComentario = async ()=>{
 
   if(!usuario){
@@ -566,7 +594,7 @@ window.baixar = ()=>{
 
   runTransaction(
     ref(db,"mods/"+id+"/downloads"),
-    val=>(val||0)+1
+    val => (val || 0) + 1
   );
 
   const a = document.createElement("a");
