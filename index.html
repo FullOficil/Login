@@ -6,7 +6,12 @@
 <title>ModSteam Pro</title>
 
 <style>
-body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b0b0b;
+  color: white;
+}
 
 .header {
   padding: 15px;
@@ -26,6 +31,35 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
 .menu-btn {
   font-size: 22px;
   cursor: pointer;
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* NOTIFICAÇÃO */
+.notify-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#1f1f1f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  font-size:18px;
+}
+
+.notify-dot{
+  position:absolute;
+  top:7px;
+  right:8px;
+  width:8px;
+  height:8px;
+  background:#00c853;
+  border-radius:50%;
 }
 
 .login-btn{
@@ -88,7 +122,9 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
   display: block;
 }
 
-.search { padding: 10px; }
+.search {
+  padding: 10px;
+}
 
 .search input {
   width: 100%;
@@ -142,8 +178,10 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
 
 .loader {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 26px; height: 26px;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
   border: 3px solid #333;
   border-top: 3px solid #00c853;
   border-radius: 50%;
@@ -152,8 +190,13 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
 }
 
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .card-info {
@@ -180,7 +223,7 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
   color: #aaa;
 }
 
-/* 🆕 BADGE NOVO */
+/* BADGE NOVO */
 .new-badge {
   position: absolute;
   top: 6px;
@@ -199,6 +242,7 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
 
 <body>
 
+<!-- MENU -->
 <div class="sidebar" id="sidebar">
 
   <a href="index.html" class="active">
@@ -209,9 +253,22 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
     Download Project Zomboid
   </a>
 
-  <!-- NOVA FUNÇÃO -->
-  <a href="MinhasPublicacoes.html" id="minhasPubBtn" style="display:none;">
+  <!-- MINHAS PUBLICAÇÕES -->
+  <a href="MinhasPublicacoes.html"
+  id="minhasPubBtn"
+  style="display:none;">
+
     📦 Minha Publicações
+
+  </a>
+
+  <!-- PAINEL ADM -->
+  <a href="PainelAdm.html"
+  id="painelAdmBtn"
+  style="display:none;">
+
+    🛠️ Painel ADM
+
   </a>
 
   <a href="#">
@@ -228,39 +285,80 @@ body { margin: 0; font-family: Arial; background: #0b0b0b; color: white; }
 
 </div>
 
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+<div class="overlay"
+id="overlay"
+onclick="toggleMenu()"></div>
 
+<!-- HEADER -->
 <div class="header">
 
   <div class="header-left">
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <div class="menu-btn"
+    onclick="toggleMenu()">
+
+      ☰
+
+    </div>
+
     ModSteam Pro
+
   </div>
 
-  <button class="login-btn" id="loginBtn">
-    Login
-  </button>
+  <div class="header-right">
+
+    <!-- NOTIFICAÇÃO -->
+    <div class="notify-btn">
+
+      🔔
+
+      <div class="notify-dot"></div>
+
+    </div>
+
+    <!-- LOGIN -->
+    <button class="login-btn"
+    id="loginBtn">
+
+      Login
+
+    </button>
+
+  </div>
 
 </div>
 
+<!-- BUSCA -->
 <div class="search">
-  <input type="text" id="busca" placeholder="Pesquisar mods...">
+
+  <input
+  type="text"
+  id="busca"
+  placeholder="Pesquisar mods...">
+
 </div>
 
+<!-- SEÇÕES -->
 <div id="sections"></div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getDatabase,
   ref,
   onValue
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+/* FIREBASE */
 const app = initializeApp({
-  databaseURL: "https://dayzozmbi-server-default-rtdb.firebaseio.com"
+
+  databaseURL:
+  "https://dayzozmbi-server-default-rtdb.firebaseio.com"
+
 });
 
 const db = getDatabase(app);
@@ -268,61 +366,93 @@ const db = getDatabase(app);
 let mods = [];
 
 /* LOGIN */
-const loginBtn = document.getElementById("loginBtn");
+const loginBtn =
+document.getElementById("loginBtn");
 
 const usuario =
-  JSON.parse(localStorage.getItem("usuarioModSteam"));
+JSON.parse(
+localStorage.getItem("usuarioModSteam")
+);
 
-/* BOTÃO MINHAS PUBLICAÇÕES */
+/* BOTÕES */
 const minhasPubBtn =
-  document.getElementById("minhasPubBtn");
+document.getElementById("minhasPubBtn");
 
-/* SE ESTIVER LOGADO */
+const painelAdmBtn =
+document.getElementById("painelAdmBtn");
+
+/* LOGIN STATUS */
 if(usuario && usuario.nick){
 
-  loginBtn.innerText = usuario.nick;
+  loginBtn.innerText =
+  usuario.nick;
 
-  minhasPubBtn.style.display = "block";
+  minhasPubBtn.style.display =
+  "block";
+
+  /* ADM */
+  if(usuario.nick === "ADM"){
+
+    painelAdmBtn.style.display =
+    "block";
+
+  }else{
+
+    painelAdmBtn.style.display =
+    "none";
+
+  }
 
 }else{
 
   loginBtn.innerText = "Login";
 
-  minhasPubBtn.style.display = "none";
+  minhasPubBtn.style.display =
+  "none";
+
+  painelAdmBtn.style.display =
+  "none";
 
 }
 
+/* LOGIN CLICK */
 loginBtn.onclick = ()=>{
 
-  window.location.href = "Login.html";
+  window.location.href =
+  "Login.html";
 
 };
 
+/* MENU */
 window.toggleMenu = ()=>{
 
-  document.getElementById("sidebar")
-    .classList.toggle("open");
+  document
+  .getElementById("sidebar")
+  .classList.toggle("open");
 
-  document.getElementById("overlay")
-    .classList.toggle("show");
+  document
+  .getElementById("overlay")
+  .classList.toggle("show");
 
 };
 
+/* RENDER */
 function render(){
 
   const container =
-    document.getElementById("sections");
+  document.getElementById("sections");
 
   container.innerHTML = "";
 
   const search =
-    document.getElementById("busca")
-    .value
-    .toLowerCase();
+  document
+  .getElementById("busca")
+  .value
+  .toLowerCase();
 
   const filtered = mods.filter(m =>
 
-    (m.nome||"")
+    (m.nome || "")
     .toLowerCase()
     .includes(search)
 
@@ -330,15 +460,16 @@ function render(){
 
   const sorted = [...filtered]
 
-    .sort((a,b)=>
+  .sort((a,b)=>
 
-      (b.downloads||0)
-      -
-      (a.downloads||0)
+    (b.downloads || 0)
+    -
+    (a.downloads || 0)
 
-    );
+  );
 
-  const top4 = sorted.slice(0,4);
+  const top4 =
+  sorted.slice(0,4);
 
   if(top4.length){
 
@@ -354,7 +485,8 @@ function render(){
 
   }
 
-  const rest = sorted.slice(4);
+  const rest =
+  sorted.slice(4);
 
   if(rest.length){
 
@@ -372,22 +504,25 @@ function render(){
 
 }
 
+/* SEÇÃO */
 function section(title,data,isHorizontal){
 
   const wrap =
-    document.createElement("div");
+  document.createElement("div");
 
   const t =
-    document.createElement("div");
+  document.createElement("div");
 
-  t.className = "section-title";
+  t.className =
+  "section-title";
 
   t.innerText = title;
 
   const grid =
-    document.createElement("div");
+  document.createElement("div");
 
   grid.className =
+
     isHorizontal
     ? "horizontal"
     : "grid";
@@ -395,23 +530,29 @@ function section(title,data,isHorizontal){
   data.forEach(m=>{
 
     const div =
-      document.createElement("div");
+    document.createElement("div");
 
     div.className = "card";
 
-    const agora = Date.now();
+    const agora =
+    Date.now();
 
     const umDia =
-      24 * 60 * 60 * 1000;
+    24 * 60 * 60 * 1000;
 
     const isNovo =
+
       m.data &&
       (agora - m.data) <= umDia;
 
     div.innerHTML = `
       <div class="card-img">
 
-        ${isNovo ? `<div class="new-badge">NOVO</div>` : ""}
+        ${
+          isNovo
+          ? `<div class="new-badge">NOVO</div>`
+          : ""
+        }
 
         <div class="loader"></div>
 
@@ -426,34 +567,38 @@ function section(title,data,isHorizontal){
         </div>
 
         <div class="card-meta">
-          Versão ${m.versao||"N/A"}
+          Versão ${m.versao || "N/A"}
         </div>
 
         <div class="card-meta">
-          📥 ${m.downloads||0}
+          📥 ${m.downloads || 0}
         </div>
 
       </div>
     `;
 
     const img =
-      div.querySelector("img");
+    div.querySelector("img");
 
     const loader =
-      div.querySelector(".loader");
+    div.querySelector(".loader");
 
     img.onload = ()=>{
 
-      loader.style.display="none";
+      loader.style.display =
+      "none";
 
-      img.style.display="block";
+      img.style.display =
+      "block";
 
     };
 
     div.onclick = ()=>{
 
       window.location.href =
-        "PaginaVisual.html?id=" + m.id;
+
+      "PaginaVisual.html?id="
+      + m.id;
 
     };
 
@@ -469,19 +614,23 @@ function section(title,data,isHorizontal){
 
 }
 
+/* PESQUISA */
 document
-  .getElementById("busca")
-  .addEventListener("input",render);
+.getElementById("busca")
+.addEventListener("input",render);
 
+/* FIREBASE */
 onValue(ref(db,"mods"),snap=>{
 
-  mods=[];
+  mods = [];
 
   snap.forEach(i=>{
 
-    let data = i.val();
+    let data =
+    i.val();
 
-    data.id = i.key;
+    data.id =
+    i.key;
 
     mods.push(data);
 
