@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b09">
+  <title>Login — DayZombi</title>
+  <meta name="description" content="Entre com sua conta Google para acessar o DayZombi.">
+  <link
+    rel="icon"
+    type="image/jpeg"
+    href="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Ficone.jpeg?alt=media&token=308c50c4-a734-4c9f-9963-4f7a168c57cb"
+  >
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="background" aria-hidden="true">
+    <div class="background__glow"></div>
+    <div class="background__grid"></div>
+  </div>
+
+  <main class="login-page">
+    <section class="login-card" aria-labelledby="login-title">
+      <div class="brand">
+        <img
+          class="brand__icon"
+          src="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Ficone.jpeg?alt=media&token=308c50c4-a734-4c9f-9963-4f7a168c57cb"
+          alt="Ícone do DayZombi"
+        >
+        <div>
+          <strong>DAYZOMBI</strong>
+          <span>CONTA DO JOGADOR</span>
+        </div>
+      </div>
+
+      <div class="login-copy">
+        <p class="eyebrow">ACESSO SEGURO</p>
+        <h1 id="login-title">Login</h1>
+        <p>Entre com a mesma conta Google usada na loja do DayZombi.</p>
+      </div>
+
+      <div class="status-box" id="status-box" aria-live="polite">
+        <span class="status-box__dot"></span>
+        <span id="status-text">Preparando o login…</span>
+      </div>
+
+      <button class="google-button" id="google-login" type="button" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#4285F4" d="M21.6 12.23c0-.72-.06-1.25-.2-1.8H12v3.42h5.52a4.72 4.72 0 0 1-2.05 3.1v2.22h3.31c1.94-1.79 2.82-4.42 2.82-6.94Z"/>
+          <path fill="#34A853" d="M12 22c2.7 0 4.97-.89 6.63-2.42l-3.31-2.22c-.92.62-2.1.98-3.32.98-2.6 0-4.81-1.76-5.6-4.12H2.98v2.29A10 10 0 0 0 12 22Z"/>
+          <path fill="#FBBC05" d="M6.4 14.22A6.02 6.02 0 0 1 6.08 12c0-.77.13-1.52.32-2.22V7.49H2.98A10 10 0 0 0 2 12c0 1.61.38 3.13.98 4.51l3.42-2.29Z"/>
+          <path fill="#EA4335" d="M12 5.66c1.47 0 2.78.5 3.82 1.49l2.87-2.87A9.63 9.63 0 0 0 12 2a10 10 0 0 0-9.02 5.49L6.4 9.78C7.19 7.42 9.4 5.66 12 5.66Z"/>
+        </svg>
+        <span>Continuar com Google</span>
+      </button>
+
+      <div class="connected-account" id="connected-account" hidden>
+        <img id="connected-avatar" alt="">
+        <div>
+          <small>CONTA CONECTADA</small>
+          <strong id="connected-name"></strong>
+          <span id="connected-email"></span>
+        </div>
+      </div>
+
+      <button class="open-app-button" id="open-app" type="button" hidden>
+        Abrir DayZombi
+      </button>
+
+      <button class="logout-button" id="logout" type="button" hidden>
+        Usar outra conta Google
+      </button>
+
+      <p class="privacy-note">
+        O site não envia sua senha ao DayZombi. O login é feito pelo Firebase Authentication.
+      </p>
+    </section>
+  </main>
+
+  <div class="modal" id="nickname-modal" hidden>
+    <div class="modal__backdrop"></div>
+    <section class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="nickname-title">
+      <p class="eyebrow">PRIMEIRO ACESSO</p>
+      <h2 id="nickname-title">Crie seu Nick</h2>
+      <p>Esta conta Google ainda não possui um Nick registrado no DayZombi.</p>
+
+      <label for="nickname-input">Nick da conta</label>
+      <input
+        id="nickname-input"
+        type="text"
+        minlength="3"
+        maxlength="20"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Exemplo: Sobrevivente_01"
+      >
+      <small>Use letras, números, _ ou -. O Nick não poderá ser duplicado.</small>
+      <p class="field-error" id="nickname-error" aria-live="polite"></p>
+
+      <button class="primary-button" id="save-nickname" type="button">
+        Criar conta e entrar
+      </button>
+      <button class="secondary-button" id="cancel-nickname" type="button">
+        Cancelar
+      </button>
+    </section>
+  </div>
+</body>
+</html>
