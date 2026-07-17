@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b09">
+
+  <title>DayZombi — Apoie o Desenvolvimento</title>
+  <meta
+    name="description"
+    content="Apoie o desenvolvimento do DayZombi, participe dos testes e acompanhe como o valor será investido no projeto. O jogo será gratuito na Play Store."
+  >
+
+  <link
+    rel="icon"
+    type="image/jpeg"
+    href="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Ficone.jpeg?alt=media&token=308c50c4-a734-4c9f-9963-4f7a168c57cb"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="background" aria-hidden="true">
+    <video class="background__video" autoplay muted loop playsinline preload="metadata">
+      <source
+        src="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Fvideo%20de%20fundo%20loja.mp4?alt=media&token=8a0406cd-79d0-4c6c-a5b1-fe77aea1ba2a"
+        type="video/mp4"
+      >
+    </video>
+    <div class="background__shade"></div>
+    <div class="background__texture"></div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="DayZombi — início">
+      <img
+        class="brand__icon"
+        src="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Ficone.jpeg?alt=media&token=308c50c4-a734-4c9f-9963-4f7a168c57cb"
+        alt="Ícone do DayZombi"
+      >
+      <span class="brand__text">
+        <strong>DAYZOMBI</strong>
+        <small>APOIO AO PROJETO</small>
+      </span>
+    </a>
+
+    <a class="topbar__cta" href="#comprar">Apoiar o projeto</a>
+  </header>
+
+  <main id="inicio">
+    <section class="free-release-notice" aria-label="Aviso sobre o lançamento gratuito">
+      <div class="free-release-notice__inner section-shell">
+        <span class="free-release-notice__label">AVISO IMPORTANTE</span>
+        <div class="free-release-notice__content">
+          <strong>O DayZombi será gratuito na Play Store</strong>
+          <p>
+            O valor de <b>R$ 50</b> pedido agora não é para comprar o jogo final.
+            É um apoio opcional para as necessidades atuais do desenvolvimento e dá acesso às versões de teste e aos benefícios de apoiador.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="hero section-shell">
+      <div class="hero__content">
+        <div class="status-pill">
+          <span class="status-pill__dot"></span>
+          APOIO E ACESSO AOS TESTES
+        </div>
+
+        <p class="eyebrow">SOBREVIVA. TESTE. DEIXE SUA MARCA.</p>
+
+        <h1>
+          Apoie o desenvolvimento de
+          <span>DayZombi</span>
+        </h1>
+
+        <p class="hero__description">
+          O jogo final será gratuito na Play Store. Os R$ 50 são um apoio opcional para
+          ferramentas, animações, modelos, cenários e outras necessidades do projeto.
+        </p>
+
+        <div class="hero__actions">
+          <a class="button button--primary" href="#comprar">
+            <span>Quero apoiar o projeto</span>
+            <b aria-hidden="true">→</b>
+          </a>
+          <a class="button button--ghost" href="#beneficios">Ver benefícios</a>
+        </div>
+
+        <div class="hero__trust">
+          <span>✓ Acesso às builds de teste</span>
+          <span>✓ 100% reinvestido no jogo</span>
+          <span>✓ Prestação de contas em vídeo</span>
+        </div>
+      </div>
+
+      <aside class="access-card" id="comprar" aria-label="Oferta de acesso de teste">
+        <div class="access-card__head">
+          <span class="access-card__tag">APOIO FUNDADOR</span>
+          <span class="access-card__availability">ACESSO LIMITADO</span>
+        </div>
+
+        <img
+          class="access-card__icon"
+          src="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Ficone.jpeg?alt=media&token=308c50c4-a734-4c9f-9963-4f7a168c57cb"
+          alt="Ícone do jogo DayZombi"
+        >
+
+        <div class="access-card__title">
+          <p>APOIO + ACESSO DE TESTE</p>
+          <h2>DayZombi</h2>
+        </div>
+
+        <ul class="access-card__list">
+          <li class="access-card__skin-benefit">
+            <div class="access-card__skin-copy">
+              <small>ITEM EXCLUSIVO DO APOIADOR</small>
+              <strong>Skin Bala Clava de Caveira</strong>
+              <span>Receba esta skin especial dentro do jogo.</span>
+            </div>
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Fskin%20bala%20clava.png?alt=media&token=5bda2114-2480-4a6f-8f22-400cd088604f"
+              alt="Skin Bala Clava de Caveira"
+              loading="lazy"
+            >
+          </li>
+          <li>Atualizações frequentes das versões de teste</li>
+          <li>Grupo exclusivo de testadores no Telegram</li>
+          <li>Carta com seu nick e sua mensagem dentro do jogo</li>
+          <li>Valor 100% reinvestido no desenvolvimento</li>
+        </ul>
+
+        <div class="access-card__price">
+          <span>Apoio único e opcional</span>
+          <strong><small>R$</small> 50,00</strong>
+          <p>O jogo final será gratuito. Este valor apoia diretamente o desenvolvimento.</p>
+        </div>
+
+        <a class="button button--purchase" href="#">
+          Apoiar o DayZombi
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <p class="access-card__secure">
+          <span aria-hidden="true">▣</span>
+          Pagamento seguro via Mercado Pago
+        </p>
+      </aside>
+    </section>
+
+    <section class="donation-support section-shell" id="doar" aria-label="Apoio com valores menores">
+      <div class="donation-support__text">
+        <p class="eyebrow">QUER APENAS AJUDAR?</p>
+        <h2>Apoie com um valor menor</h2>
+        <p>
+          Escolha uma contribuição opcional. O jogo continuará gratuito na Play Store e todo o valor será usado no desenvolvimento.
+        </p>
+      </div>
+
+      <div class="donation-support__options">
+        <a class="donation-option" href="#" aria-label="Doar 5 reais para o DayZombi">
+          <small>DOAR</small>
+          <strong>R$ 5</strong>
+        </a>
+        <a class="donation-option" href="#" aria-label="Doar 10 reais para o DayZombi">
+          <small>DOAR</small>
+          <strong>R$ 10</strong>
+        </a>
+        <a class="donation-option" href="#" aria-label="Doar 20 reais para o DayZombi">
+          <small>DOAR</small>
+          <strong>R$ 20</strong>
+        </a>
+      </div>
+
+      <p class="donation-support__note">
+        As contribuições de R$ 5, R$ 10 e R$ 20 são apenas doações de apoio. O pacote de R$ 50 inclui o acesso de teste e os benefícios de apoiador.
+      </p>
+    </section>
+
+    <section class="benefits section-shell" id="beneficios">
+      <div class="section-heading">
+        <p class="eyebrow">O QUE VOCÊ RECEBE</p>
+        <h2>Mais do que apenas acesso antecipado</h2>
+        <p>
+          Você entra no processo de desenvolvimento e ganha benefícios criados especialmente
+          para quem apoiar o DayZombi durante os testes.
+        </p>
+      </div>
+
+      <div class="benefits__grid">
+        <article class="benefit-card">
+          <span class="benefit-card__number">01</span>
+          <div class="benefit-card__icon" aria-hidden="true">↻</div>
+          <h3>Atualizações frequentes</h3>
+          <p>
+            Receba novas versões de teste conforme sistemas, mapas, armas, inimigos e recursos
+            forem adicionados ou melhorados.
+          </p>
+        </article>
+
+        <article class="benefit-card">
+          <span class="benefit-card__number">02</span>
+          <div class="benefit-card__icon" aria-hidden="true">⌁</div>
+          <h3>Grupo exclusivo</h3>
+          <p>
+            Participe do grupo de testadores no Telegram para acompanhar novidades, enviar
+            feedbacks e conversar diretamente sobre o desenvolvimento.
+          </p>
+        </article>
+
+        <article class="benefit-card benefit-card--featured">
+          <span class="benefit-card__number">03</span>
+          <div class="benefit-card__icon" aria-hidden="true">✉</div>
+          <h3>Sua carta no mundo</h3>
+          <p>
+            Uma carta física aparecerá dentro do jogo com seu nick e uma mensagem escolhida por
+            você. Outros sobreviventes poderão encontrá-la, abrir e ler.
+          </p>
+          <span class="benefit-card__badge">BENEFÍCIO ESPECIAL</span>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="funding section-shell" id="apoio">
+      <div class="funding__intro">
+        <p class="eyebrow">TRANSPARÊNCIA DO APOIO</p>
+        <h2>100% do valor volta para o DayZombi</h2>
+        <p>
+          Todo o dinheiro arrecadado será usado exclusivamente para melhorar o jogo.
+          O destino dos valores será mostrado em vídeos de prestação de contas.
+        </p>
+      </div>
+
+      <div class="funding__panel">
+        <div class="funding__percent">
+          <strong>100%</strong>
+          <span>REINVESTIDO NO JOGO</span>
+        </div>
+
+        <div class="funding__uses">
+          <article>
+            <span>01</span>
+            <div>
+              <h3>Ferramentas e animações</h3>
+              <p>Recursos profissionais para melhorar personagens, movimentos e sistemas.</p>
+            </div>
+          </article>
+
+          <article>
+            <span>02</span>
+            <div>
+              <h3>Modelos e cenários</h3>
+              <p>Compra de assets para ampliar o mapa e aumentar a qualidade visual.</p>
+            </div>
+          </article>
+
+          <article>
+            <span>03</span>
+            <div>
+              <h3>Destino mostrado em vídeo</h3>
+              <p>As compras e melhorias realizadas com o apoio serão apresentadas à comunidade.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="letter section-shell">
+      <div class="letter__visual" aria-hidden="true">
+        <div class="letter-paper">
+          <div class="letter-paper__top">
+            <span>ARQUIVO DE SOBREVIVENTE</span>
+            <b>#0427</b>
+          </div>
+          <p class="letter-paper__date">Registro encontrado após o colapso</p>
+          <h3>Para quem encontrar esta carta...</h3>
+          <p>
+            Continue vivo. Não confie no silêncio e nunca deixe seus suprimentos para trás.
+          </p>
+          <div class="letter-paper__signature">
+            <small>APOIADOR</small>
+            <strong>SEU_NICK</strong>
+          </div>
+          <span class="letter-paper__stamp">DAY<br>ZOMBI</span>
+        </div>
+      </div>
+
+      <div class="letter__content">
+        <p class="eyebrow">UMA MARCA NO DAYZOMBI</p>
+        <h2>Seu nick e sua mensagem existirão dentro do jogo</h2>
+        <p>
+          Durante um período determinado após o lançamento na Play Store, cartas de apoiadores
+          serão distribuídas pelo mundo do DayZombi. Outros jogadores poderão encontrá-las em
+          casas, abrigos e locais abandonados.
+        </p>
+
+        <div class="letter__details">
+          <div>
+            <span>01</span>
+            <p>Você escolhe o nick que aparecerá na carta.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <p>Você envia uma mensagem curta para outros sobreviventes.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <p>A carta poderá ser encontrada e lida por jogadores reais.</p>
+          </div>
+        </div>
+
+        <p class="letter__notice">
+          A mensagem estará sujeita à análise antes de ser adicionada ao jogo.
+        </p>
+      </div>
+    </section>
+
+    <section class="tester section-shell">
+      <div class="tester__content">
+        <p class="eyebrow">FAÇA PARTE DO DESENVOLVIMENTO</p>
+        <h2>Ajude a transformar o teste em um jogo melhor</h2>
+        <p>
+          Relate erros, avalie sistemas e envie sugestões. O feedback dos testadores será usado
+          para definir correções e prioridades das próximas atualizações.
+        </p>
+      </div>
+
+      <div class="tester__stats">
+        <div>
+          <strong>BUILD</strong>
+          <span>Novas versões</span>
+        </div>
+        <div>
+          <strong>FEEDBACK</strong>
+          <span>Contato com a equipe</span>
+        </div>
+        <div>
+          <strong>COMUNIDADE</strong>
+          <span>Grupo exclusivo</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq section-shell">
+      <div class="section-heading section-heading--left">
+        <p class="eyebrow">INFORMAÇÕES IMPORTANTES</p>
+        <h2>Antes de apoiar o projeto</h2>
+      </div>
+
+      <div class="faq__grid">
+        <article>
+          <h3>O jogo final será pago?</h3>
+          <p>
+            Não. O DayZombi será lançado gratuitamente na Play Store. Os R$ 50 são um apoio
+            opcional ao desenvolvimento e incluem acesso antecipado às versões de teste.
+          </p>
+        </article>
+
+        <article>
+          <h3>Onde receberei as atualizações?</h3>
+          <p>
+            As instruções de acesso e os avisos sobre novas versões serão enviados pelos canais
+            informados após a confirmação do pagamento.
+          </p>
+        </article>
+
+        <article>
+          <h3>A carta ficará para sempre?</h3>
+          <p>
+            A carta ficará disponível por um período determinado no lançamento da versão da Play
+            Store. A duração exata será informada aos apoiadores.
+          </p>
+        </article>
+
+        <article>
+          <h3>Posso colocar qualquer mensagem?</h3>
+          <p>
+            Não. Mensagens ofensivas, impróprias ou que violem as regras não serão adicionadas.
+            Você poderá enviar outra mensagem para análise.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="final-cta section-shell">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Ficone.jpeg?alt=media&token=308c50c4-a734-4c9f-9963-4f7a168c57cb"
+        alt=""
+      >
+      <div>
+        <p class="eyebrow">O MUNDO ESTÁ SENDO CONSTRUÍDO</p>
+        <h2>Apoie agora e participe dos testes</h2>
+        <p>Apoie com R$ 50, participe dos testes e acompanhe onde o valor será investido.</p>
+      </div>
+      <a class="button button--primary" href="#comprar">Apoiar o projeto</a>
+    </section>
+  </main>
+
+  <footer class="footer section-shell">
+    <a class="brand brand--footer" href="#inicio">
+      <img
+        class="brand__icon"
+        src="https://firebasestorage.googleapis.com/v0/b/dayzozmbi-server.firebasestorage.app/o/Loja%20DayZombi%2Ficone.jpeg?alt=media&token=308c50c4-a734-4c9f-9963-4f7a168c57cb"
+        alt="Ícone DayZombi"
+      >
+      <span class="brand__text">
+        <strong>DAYZOMBI</strong>
+        <small>APOIO AO PROJETO</small>
+      </span>
+    </a>
+
+    <p>© 2026 DayZombi. Todos os direitos reservados.</p>
+    <p class="footer__warning">Produto em desenvolvimento. As imagens e os recursos podem sofrer alterações.</p>
+  </footer>
+</body>
+</html>
