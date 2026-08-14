@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070a08">
+  <meta name="description" content="Loja oficial do Day Zombi Survival. Compre Títulos com segurança e receba diretamente na sua conta.">
+  <title>Day Zombi Survival — Loja Oficial</title>
+  <link rel="icon" href="/assets/Icone_Game.png">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="background" aria-hidden="true">
+    <div class="background__slide is-active" style="background-image:url('/assets/Image_1.jpg')"></div>
+    <div class="background__slide" style="background-image:url('/assets/Image_2.jpg')"></div>
+    <div class="background__slide" style="background-image:url('/assets/Image_3.jpg')"></div>
+    <div class="background__shade"></div>
+    <div class="background__grain"></div>
+  </div>
+
+  <header class="topbar shell">
+    <a href="#inicio" class="brand" aria-label="Day Zombi Survival">
+      <img src="/assets/Icone_Game.png" alt="" class="brand__icon">
+      <span>
+        <strong>DAY ZOMBI SURVIVAL</strong>
+        <small>LOJA OFICIAL</small>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#inicio">Início</a>
+      <a href="#loja">Loja</a>
+      <a href="#como-funciona">Como funciona</a>
+      <button class="nav__account" id="accountButton" type="button">
+        <span class="account-avatar" id="accountAvatar">G</span>
+        <span id="accountText">Entrar na conta</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero shell" id="inicio">
+      <div class="hero__content">
+        <div class="status-pill"><span></span> LOJA OFICIAL • PAGAMENTO SEGURO</div>
+        <p class="eyebrow">DAY ZOMBI SURVIVAL</p>
+        <h1>Loja Oficial <em>Day Zombi Survival</em></h1>
+        <p class="hero__lead">Adquira Títulos para usar no Day Zombi Survival de forma rápida e segura.</p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#loja">Ver Títulos</a>
+          <button class="button button--ghost" id="heroAccountButton" type="button">Minha conta</button>
+        </div>
+        <div class="hero__security">
+          <span>✓ Valores protegidos</span>
+          <span>✓ Crédito automático</span>
+          <span>✓ Compra protegida</span>
+        </div>
+      </div>
+
+      <aside class="wallet-card" id="walletCard">
+        <div class="wallet-card__icon-wrap">
+          <img src="/assets/Icone_Titulos.png" alt="Ícone de Títulos" class="wallet-card__icon">
+        </div>
+        <p>SEU SALDO</p>
+        <strong id="walletBalance">—</strong>
+        <span>Títulos</span>
+        <small id="walletNick">Entre na sua conta para consultar o saldo.</small>
+      </aside>
+    </section>
+
+    <section class="store-section" id="loja">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">CRÉDITOS DO JOGO</p>
+            <h2>Comprar Títulos</h2>
+          </div>
+          <p>Escolha entre os pacotes normais ou veja as promoções disponíveis.</p>
+        </div>
+
+        <section class="key-sale-banner" id="keySaleBanner" hidden aria-label="Venda de chave de acesso">
+          <div class="key-sale-banner__copy">
+            <p class="eyebrow">ACESSO AO TESTE</p>
+            <h3 id="keySaleBannerTitle">Compra de chave promocional</h3>
+            <p id="keySaleBannerDescription">Oferta de chave de acesso disponível.</p>
+            <span class="key-sale-banner__timer" id="keySaleBannerTimer" hidden></span>
+          </div>
+          <button class="button button--primary" id="keySaleViewButton" type="button">Ver oferta</button>
+        </section>
+
+        <div class="store-tabs" role="tablist" aria-label="Tipo de oferta">
+          <button class="store-tab" id="promoTab" type="button" data-store-tab="promocoes" role="tab" aria-selected="false">Promoções <span id="promoTabCount">0</span></button>
+          <button class="store-tab is-active" id="normalTab" type="button" data-store-tab="normal" role="tab" aria-selected="true">Pacotes</button>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+          <div class="product-skeleton"></div>
+          <div class="product-skeleton"></div>
+          <div class="product-skeleton"></div>
+          <div class="product-skeleton"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section shell" id="como-funciona">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SEM CÓDIGO MANUAL</p>
+          <h2>Como a compra chega ao jogo</h2>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article><b>01</b><h3>Entre na conta</h3><p>Acesse a conta vinculada ao seu perfil Day Zombi.</p></article>
+        <article><b>02</b><h3>Escolha os Títulos</h3><p>Selecione o pacote desejado e finalize o pagamento.</p></article>
+        <article><b>03</b><h3>Crédito automático</h3><p>Após a confirmação do pagamento, os Títulos são adicionados automaticamente.</p></article>
+        <article><b>04</b><h3>Abra o jogo</h3><p>Seu novo saldo ficará disponível na conta vinculada ao jogo.</p></article>
+      </div>
+    </section>
+
+    <section class="gallery shell" aria-label="Imagens do jogo">
+      <div class="gallery__item gallery__item--wide" style="background-image:url('/assets/Image_1.jpg')"></div>
+      <div class="gallery__item" style="background-image:url('/assets/Image_2.jpg')"></div>
+      <div class="gallery__item" style="background-image:url('/assets/Image_3.jpg')"></div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <div class="brand brand--footer">
+      <img src="/assets/Icone_Game.png" alt="" class="brand__icon">
+      <span><strong>DAY ZOMBI SURVIVAL</strong><small>LOJA OFICIAL</small></span>
+    </div>
+    <p>Day Zombi Survival • Loja Oficial</p>
+  </footer>
+
+  <div class="modal" id="promoNewsModal" hidden>
+    <div class="modal__backdrop" data-close="promoNews"></div>
+    <section class="modal__panel modal__panel--small promo-news" role="dialog" aria-modal="true" aria-labelledby="promoNewsTitle">
+      <button class="modal__close" type="button" data-close="promoNews">×</button>
+      <p class="eyebrow">NOVIDADES</p>
+      <h2 id="promoNewsTitle">Promoções disponíveis</h2>
+      <p id="promoNewsText">Temos novas promoções disponíveis na loja.</p>
+      <div class="promo-news__actions">
+        <button class="button button--ghost" id="promoNewsCloseButton" type="button">Fechar</button>
+        <button class="button button--primary" id="promoNewsViewButton" type="button">Ver promoções</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal" id="keySaleModal" hidden>
+    <div class="modal__backdrop" data-close="keySale"></div>
+    <section class="modal__panel modal__panel--small key-sale-modal" role="dialog" aria-modal="true" aria-labelledby="keySaleTitle">
+      <button class="modal__close" type="button" data-close="keySale">×</button>
+      <p class="eyebrow" id="keySaleEyebrow">CHAVE DE ACESSO</p>
+      <h2 id="keySaleTitle">Chave de acesso Day Zombi</h2>
+      <p id="keySaleDescription">—</p>
+      <div class="key-sale-modal__price"><span>Valor</span><strong id="keySalePrice">—</strong></div>
+      <div class="key-sale-modal__timer" id="keySaleTimer" hidden></div>
+      <p class="key-sale-modal__note">Após a aprovação do pagamento, uma chave será gerada e vinculada à sua conta.</p>
+      <button class="button button--primary button--full" id="keySaleBuyButton" type="button">Comprar chave</button>
+      <button class="button button--ghost button--full" id="keySaleOwnedButton" type="button" hidden>Ver minha chave</button>
+    </section>
+  </div>
+
+  <div class="modal" id="accessModal" hidden>
+    <div class="modal__backdrop" data-close="access"></div>
+    <section class="modal__panel modal__panel--small access-modal-new" role="dialog" aria-modal="true" aria-labelledby="accessTitle">
+      <button class="modal__close" type="button" data-close="access">×</button>
+      <p class="eyebrow">ACESSO LIBERADO</p>
+      <h2 id="accessTitle">Sua chave de acesso</h2>
+      <p class="access-modal-new__warning">A chave será vinculada ao primeiro jogador que ativá-la. Não compartilhe.</p>
+      <div class="access-key-box">
+        <span>SUA CHAVE</span>
+        <code id="accessKeyValue">—</code>
+        <button class="button button--primary button--full" id="copyAccessKeyButton" type="button">Copiar chave</button>
+      </div>
+      <p class="access-key-status" id="accessKeyStatus">—</p>
+      <div class="access-actions-new">
+        <a class="button button--ghost button--full" id="accessTelegram" target="_blank" rel="noopener noreferrer" hidden>Entrar no Telegram</a>
+        <a class="button button--ghost button--full" id="accessDownload" target="_blank" rel="noopener noreferrer" hidden>Baixar versão de teste</a>
+      </div>
+      <small class="muted" id="accessDownloadNote"></small>
+    </section>
+  </div>
+
+  <div class="modal" id="authModal" hidden>
+    <div class="modal__backdrop" data-close="auth"></div>
+    <section class="modal__panel modal__panel--small" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="modal__close" type="button" data-close="auth">×</button>
+      <p class="eyebrow">CONTA DAY ZOMBI</p>
+      <h2 id="authTitle">Entrar na loja</h2>
+      <p>Entre na sua conta. Se for seu primeiro acesso, escolha o Nick que ficará vinculado ao perfil.</p>
+      <button class="google-button" id="googleLoginButton" type="button"><span>G</span> Continuar</button>
+      <p class="form-error" id="authError"></p>
+    </section>
+  </div>
+
+  <div class="modal" id="nickModal" hidden>
+    <div class="modal__backdrop"></div>
+    <section class="modal__panel modal__panel--small" role="dialog" aria-modal="true" aria-labelledby="nickTitle">
+      <p class="eyebrow">PRIMEIRO ACESSO</p>
+      <h2 id="nickTitle">Escolha seu Nick</h2>
+      <p>Esse Nick será associado à conta e usado pela loja para entregar suas compras.</p>
+      <form id="nickForm">
+        <label class="field">Nick<input id="nickInput" maxlength="20" autocomplete="nickname" placeholder="Ex.: Diniz" required></label>
+        <p class="form-error" id="nickError"></p>
+        <button class="button button--primary button--full" type="submit">Salvar Nick</button>
+        <button class="button button--ghost button--full nick-logout" id="logoutNickButton" type="button">Sair da conta</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal" id="accountModal" hidden>
+    <div class="modal__backdrop" data-close="account"></div>
+    <section class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+      <button class="modal__close" type="button" data-close="account">×</button>
+      <div class="account-head">
+        <div class="account-head__avatar" id="accountModalAvatar">G</div>
+        <div><p class="eyebrow">MINHA CONTA</p><h2 id="accountTitle">Conta Day Zombi</h2><p id="accountEmail">—</p></div>
+      </div>
+      <div class="account-stats">
+        <div><span>Nick</span><strong id="accountNick">—</strong></div>
+        <div><span>Saldo</span><strong><span id="accountBalance">0</span> Títulos</strong></div>
+      </div>
+      <div class="history-head"><h3>Histórico de compras</h3><button class="link-button" id="refreshWalletButton" type="button">Atualizar</button></div>
+      <div class="history" id="purchaseHistory"><p class="muted">Nenhuma compra carregada.</p></div>
+      <button class="button button--ghost button--full" id="logoutButton" type="button">Sair da conta</button>
+    </section>
+  </div>
+
+  <div class="modal" id="checkoutModal" hidden>
+    <div class="modal__backdrop" data-close="checkout"></div>
+    <section class="modal__panel modal__panel--checkout" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <button class="modal__close" type="button" data-close="checkout">×</button>
+      <div class="checkout-head">
+        <img src="/assets/Icone_Titulos.png" alt="" class="checkout-head__icon" id="checkoutIcon">
+        <div><p class="eyebrow">CHECKOUT SEGURO</p><h2 id="checkoutTitle">Comprar Títulos</h2><p id="checkoutDescription">—</p></div>
+        <strong id="checkoutPrice">—</strong>
+      </div>
+      <div id="paymentBrickContainer"></div>
+      <div class="payment-result" id="paymentResult" hidden></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+</body>
+</html>
