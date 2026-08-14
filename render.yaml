@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: dayzombi-login
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/saude
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: APP_PACKAGE
+        value: com.VerteSZ.DayZombi
+      - key: APP_SCHEME
+        value: dayzombi

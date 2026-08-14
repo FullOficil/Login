@@ -1,0 +1,20 @@
+{
+  "name": "dayzombi-login-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Login Google do DayZombi com cadastro de Nick e retorno seguro ao aplicativo Android",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check public/app.js"
+  },
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "firebase-admin": "^14.2.0"
+  }
+}
